@@ -1,0 +1,9 @@
+{
+  "model": {
+    "provider": "kilo",
+    "id": "deepseek/deepseek-v4-pro"
+  },
+  "maxWords": 4,
+  "maxTitleLength": 40,
+  "debug": false
+}
