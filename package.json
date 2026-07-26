@@ -5,7 +5,9 @@
   "keywords": [
     "Pi",
     "Herdr",
-    "Tab"
+    "Tab",
+    "pi-package",
+    "pi-extension"
   ],
   "homepage": "https://github.com/walidsi/pi-herdr-tab-namer#readme",
   "bugs": {
@@ -18,14 +20,25 @@
   "license": "MIT",
   "author": "Walid Ismail",
   "type": "module",
-  "main": "index.ts",
-  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./index.ts"
+    }
+  },
   "files": [
     "index.ts",
     "dist",
     "config.json",
-    "README.md"
+    "README.md",
+    "LICENSE.txt"
   ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
@@ -33,5 +46,14 @@
   },
   "devDependencies": {
     "typescript": "^5.5.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": ">=0.79.0",
+    "@earendil-works/pi-coding-agent": ">=0.79.0"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
   }
 }
