@@ -34,7 +34,7 @@ import { complete } from "@earendil-works/pi-ai/compat";
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 
 const DEBUG_LOG = resolve(dirname(fileURLToPath(import.meta.url)), "debug.log");
-const FALLBACK_LOG = process.platform === "win32" ? "C:\\Users\\walid\\herdr-tab-namer-debug.log" : "/tmp/herdr-tab-namer-debug.log";
+const FALLBACK_LOG = process.platform === "win32" ? "%TEMP%\\pi-herdr-tab-namer-debug.log" : "/tmp/pi-herdr-tab-namer-debug.log";
 
 function makeLog(enabled: boolean) {
   if (!enabled) {
