@@ -8,8 +8,7 @@ never appears in the chat transcript.
 ## Install
 
 ```bash
-mkdir -p ~/.pi/agent/extensions/pi-herdr-tab-namer
-cp index.ts config.json ~/.pi/agent/extensions/pi-herdr-tab-namer/
+pi install npm:@walidsi/pi-herdr-tab-namer
 ```
 
 (Use `.pi/extensions/pi-herdr-tab-namer/` instead for a project-local install.)
