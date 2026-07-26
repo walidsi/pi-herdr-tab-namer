@@ -18,9 +18,10 @@
   "license": "MIT",
   "author": "Walid Ismail",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "index.ts",
   "types": "dist/index.d.ts",
   "files": [
+    "index.ts",
     "dist",
     "config.json",
     "README.md"
@@ -32,9 +33,5 @@
   },
   "devDependencies": {
     "typescript": "^5.5.0"
-  },
-  "peerDependencies": {
-    "@earendil-works/pi-ai": "*",
-    "@earendil-works/pi-coding-agent": "*"
   }
 }
