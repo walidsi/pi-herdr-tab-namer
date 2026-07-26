@@ -297,7 +297,8 @@ async function nameHerdrTab(
 
   const model = resolveModel(ctx.modelRegistry, config.model);
   if (!model) {
-    const available = ctx.modelRegistry.list?.().map((m: any) => `${m.provider}/${m.id}`).join(", ") ?? "(unknown)";
+    const registry = ctx.modelRegistry as any;
+    const available = registry.list?.().map((m: any) => `${m.provider}/${m.id}`).join(", ") ?? "(unknown)";
     log(
       `[herdr-tab-namer] Model ${config.model.provider}/${config.model.id} not found. Available: ${available}`,
     );
@@ -322,6 +323,7 @@ async function nameHerdrTab(
         messages: [
           {
             role: "user",
+            timestamp: Date.now(),
             content: [
               `Create a short topic title for a terminal tab based on the user's request.`,
               `The title should be the main subject, not a sentence fragment.`,
@@ -353,6 +355,7 @@ async function nameHerdrTab(
           messages: [
             {
               role: "user",
+              timestamp: Date.now(),
               content: [
                 `Summarize the following request as a short terminal tab title.`,
                 `Respond with ${config.maxWords} words or fewer.`,
@@ -406,7 +409,7 @@ async function nameHerdrTab(
       .map((c: any) => c.thinking)
       .join(" ");
     rawTitle = textParts || extractTitleFromThinking(thinkingParts);
-    log("[herdr-tab-namer] complete() returned content array, extracted:", rawTitle.slice(0, 200));
+    log("[herdr-tab-namer] complete() returned content array, extracted:", (rawTitle ?? "").slice(0, 200));
   } else if (typeof resp.text === "string") {
     rawTitle = resp.text;
   } else if (typeof resp.message?.content === "string") {
