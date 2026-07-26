@@ -1,4 +1,4 @@
-# herdr-tab-namer
+# pi-herdr-tab-namer
 
 A Pi extension that renames the current Herdr tab from a short summary of
 your first prompt in the session. Summarization runs in the background
@@ -8,11 +8,11 @@ never appears in the chat transcript.
 ## Install
 
 ```bash
-mkdir -p ~/.pi/agent/extensions/herdr-tab-namer
-cp index.ts config.json ~/.pi/agent/extensions/herdr-tab-namer/
+mkdir -p ~/.pi/agent/extensions/pi-herdr-tab-namer
+cp index.ts config.json ~/.pi/agent/extensions/pi-herdr-tab-namer/
 ```
 
-(Use `.pi/extensions/herdr-tab-namer/` instead for a project-local install.)
+(Use `.pi/extensions/pi-herdr-tab-namer/` instead for a project-local install.)
 
 Then edit `config.json` so `model` points at something you actually have
 credentials for in pi (check with `pi --list-models`):
@@ -28,9 +28,8 @@ credentials for in pi (check with `pi --list-models`):
 
 - `maxWords` / `maxTitleLength` control how terse the generated tab title is.
 - `debug: true` enables file logging to `debug.log` next to the loaded
-  extension (fallback: `C:\Users\walid\herdr-tab-namer-debug.log` on Windows,
-  `/tmp/herdr-tab-namer-debug.log` elsewhere). Leave it `false` to keep the
-  extension completely silent.
+  extension, `/tmp/pi-herdr-tab-namer-debug.log` elsewhere). Leave it `false` 
+  to keep the extension completely silent.
 
 No `npm install` needed — the extension only uses `node:fs`, `node:url`, and
 the `@earendil-works/pi-ai` / `@earendil-works/pi-coding-agent` packages Pi
