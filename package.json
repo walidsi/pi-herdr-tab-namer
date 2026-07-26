@@ -1,0 +1,40 @@
+{
+  "name": "pi-herdr-tab-namer",
+  "version": "0.1.0",
+  "description": "A Pi extension that renames the current Herdr tab from a short summary of the user's first prompt",
+  "keywords": [
+    "Pi",
+    "Herdr",
+    "Tab"
+  ],
+  "homepage": "https://github.com/walidsi/pi-herdr-tab-namer#readme",
+  "bugs": {
+    "url": "https://github.com/walidsi/pi-herdr-tab-namer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walidsi/pi-herdr-tab-namer.git"
+  },
+  "license": "MIT",
+  "author": "Walid Ismail",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "config.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
