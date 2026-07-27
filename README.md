@@ -11,8 +11,6 @@ never appears in the chat transcript.
 pi install npm:@walidsi/pi-herdr-tab-namer
 ```
 
-(Use `.pi/extensions/pi-herdr-tab-namer/` instead for a project-local install.)
-
 Then edit `config.json` so `model` points at something you actually have
 credentials for in pi (check with `pi --list-models`):
 
@@ -29,10 +27,6 @@ credentials for in pi (check with `pi --list-models`):
 - `debug: true` enables file logging to `debug.log` next to the loaded
   extension, `/tmp/pi-herdr-tab-namer-debug.log` elsewhere). Leave it `false` 
   to keep the extension completely silent.
-
-No `npm install` needed — the extension only uses `node:fs`, `node:url`, and
-the `@earendil-works/pi-ai` / `@earendil-works/pi-coding-agent` packages Pi
-already provides to extensions.
 
 ## Behavior notes / assumptions
 
