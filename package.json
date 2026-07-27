@@ -1,6 +1,6 @@
 {
   "name": "@walidsi/pi-herdr-tab-namer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Pi extension that renames the current Herdr tab from a short summary of the user's first prompt",
   "keywords": [
     "Pi",
