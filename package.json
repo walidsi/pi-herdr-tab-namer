@@ -3,11 +3,12 @@
   "version": "0.1.1",
   "description": "A Pi extension that renames the current Herdr tab from a short summary of the user's first prompt",
   "keywords": [
-    "Pi",
-    "Herdr",
-    "Tab",
+    "pi",
+    "herdr",
+    "tab",
     "pi-package",
-    "pi-extension"
+    "pi-extension",
+    "extension"
   ],
   "homepage": "https://github.com/walidsi/pi-herdr-tab-namer#readme",
   "bugs": {
