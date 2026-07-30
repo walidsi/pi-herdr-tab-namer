@@ -6,14 +6,14 @@
 		"--name",
 		"nodejs-agents"
 	],
-	"initializeCommand": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"robocopy $env:USERPROFILE\\.agents\\skills .devcontainer\\generated\\skills /MIR; if($LASTEXITCODE -gt 1){exit $LASTEXITCODE};\"",
+	"initializeCommand": "pwsh.exe -ExecutionPolicy Bypass -File .devcontainer\\initialize.ps1",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	// "forwardPorts": []
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "sudo chown -R agent:agent /workspaces && rm -rf .devcontainer/generated",
 	// Configure tool-specific properties.
