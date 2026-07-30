@@ -15,7 +15,7 @@
         }
     },
     "permission": {
-        "*": "ask",
+        "*": "allow",
         "path": {
             "*": "allow",
             "*.env": "deny",
