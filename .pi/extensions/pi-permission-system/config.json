@@ -27,19 +27,20 @@
         "edit": "deny",
         "herdr*": "allow",
         "bash": {
-            "*": "ask",
-            "ls": "allow",
-            "pwd": "allow",
-            "find": "allow",
-            "grep": "allow",
-            "cat": "allow",
+            "*": "allow",
+            "rm *": "ask",
+            "rm -rf *": "deny",
+            "mv *": "ask",
+            "sudo *": "ask",
+            "chmod *": "ask",
+            "git push *": "ask",
             "git *": "ask",
-            "git status": "allow",
-            "git diff": "allow",
             "npm *": {
                 "action": "deny",
                 "reason": "Use pnpm instead"
-            }
+            },
+            "curl * | *": "deny",
+            "> *": "ask"
         },
         "mcp": {
             "*": "ask",
