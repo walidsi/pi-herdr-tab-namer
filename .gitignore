@@ -4,5 +4,6 @@ dist/
 .DS_Store
 *.tsbuildinfo
 .kilo
-
+.devcontainer/skills
+.devcontainer/AGENTS.md
 
