@@ -6,7 +6,7 @@
 		"--name",
 		"nodejs-agents"
 	],
-	"initializeCommand": "pwsh.exe -ExecutionPolicy Bypass -File .devcontainer\\initialize.ps1",
+	"initializeCommand": "bash .devcontainer/initialize.sh",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
