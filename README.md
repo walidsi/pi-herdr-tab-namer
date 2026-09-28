@@ -38,6 +38,10 @@ model you have credentials for in Pi:
 | `maxTitleLength` | Hard character limit for the generated title. |
 | `debug` | Write diagnostic logs to `debug.log` when `true`. |
 
+If the configured model is not available in your Pi registry, or its provider
+has no credentials in Pi, the extension falls back to the session's active
+model (then to the first registered model) instead of silently doing nothing.
+
 ## How it works
 
 - Triggers once per session on the first real user message.
