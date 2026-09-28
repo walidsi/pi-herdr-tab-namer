@@ -154,6 +154,15 @@ function resolveModel(
 }
 
 /**
+ * Fall back to the model this session is already using (then to the first
+ * registered model). Without this, a stale or missing config.json entry makes
+ * the extension silently do nothing instead of naming the tab.
+ */
+function fallbackModel(ctx: ExtensionContext): any {
+  return ctx.model ?? (ctx.modelRegistry as any).list?.()[0] ?? null;
+}
+
+/**
  * Run `herdr <args>` directly via child_process.spawn, mimicking the pi-herdr
  * extension's wrapper. This avoids any semantics mismatch with pi.exec and
  * parses herdr's JSON envelope.
@@ -295,20 +304,43 @@ async function nameHerdrTab(
     }
   }
 
-  const model = resolveModel(ctx.modelRegistry, config.model);
-  if (!model) {
+  // Candidate models, best first: the configured one, then the model this
+  // session is already using, then the first registered model. Pick the first
+  // one Pi can actually authenticate: a config entry that resolves in the
+  // catalog but has no credentials (e.g. the shipped default when the user has
+  // no key for that provider) must not silently disable renaming.
+  const candidates: any[] = [];
+  for (const candidate of [resolveModel(ctx.modelRegistry, config.model), fallbackModel(ctx)]) {
+    if (candidate && !candidates.some((c) => c.provider === candidate.provider && c.id === candidate.id)) {
+      candidates.push(candidate);
+    }
+  }
+  if (candidates.length === 0) {
     const registry = ctx.modelRegistry as any;
     const available = registry.list?.().map((m: any) => `${m.provider}/${m.id}`).join(", ") ?? "(unknown)";
     log(
-      `[herdr-tab-namer] Model ${config.model.provider}/${config.model.id} not found. Available: ${available}`,
+      `[herdr-tab-namer] Model ${config.model.provider}/${config.model.id} not found and no model to fall back to. Available: ${available}`,
     );
     return;
   }
 
-  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
-  if (!auth.ok || !auth.apiKey) {
-    log("[herdr-tab-namer] No API key available for model");
+  let model: any = null;
+  let auth: any = null;
+  for (const candidate of candidates) {
+    const candidateAuth = await ctx.modelRegistry.getApiKeyAndHeaders(candidate);
+    if (candidateAuth.ok && candidateAuth.apiKey) {
+      model = candidate;
+      auth = candidateAuth;
+      break;
+    }
+    log(`[herdr-tab-namer] Skipping ${candidate.provider}/${candidate.id}: no credentials available`);
+  }
+  if (!model || !auth) {
+    log(`[herdr-tab-namer] No usable credentials for any candidate model (${candidates.map((c) => `${c.provider}/${c.id}`).join(", ")})`);
     return;
+  }
+  if (model.provider !== config.model.provider || model.id !== config.model.id) {
+    log(`[herdr-tab-namer] Using ${model.provider}/${model.id}`);
   }
 
   const apiController = new AbortController();
