@@ -311,6 +311,12 @@ async function nameHerdrTab(
     return;
   }
 
+  // OpenCode routes requests per conversation through the x-opencode-session
+  // header, filled in from options.sessionId by the provider. Pi's own turns
+  // pass it; without it the provider answers 400 MissingSessionID and every
+  // rename degrades to the raw-prompt fallback.
+  const sessionId = ctx.sessionManager.getSessionId();
+
   const apiController = new AbortController();
   const apiTimeout = setTimeout(() => apiController.abort(), 15_000);
 
@@ -341,6 +347,7 @@ async function nameHerdrTab(
         apiKey: auth.apiKey,
         headers: auth.headers,
         env: auth.env,
+        sessionId,
         maxTokens: 500,
         signal: apiController.signal,
       },
@@ -372,6 +379,7 @@ async function nameHerdrTab(
           apiKey: auth.apiKey,
           headers: auth.headers,
           env: auth.env,
+          sessionId,
           maxTokens: 20,
           signal: apiController.signal,
           reasoning_effort: "medium",
